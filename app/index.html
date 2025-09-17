@@ -103,23 +103,26 @@
                         <h2 class="text-3xl font-semibold tracking-tight">Dashboard</h2>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-6">
-                        <!-- Students Present Card -->
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-gray-200">
-                            <div class="text-xs text-green-500 mb-2 font-semibold">Students Present Today</div>
-                            <div id="attendance-count-main" class="text-5xl font-bold">0</div>
-                        </div>
-                        <!-- Circular Progress Card -->
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-gray-200 relative aspect-square">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <svg class="w-full h-full transform -rotate-90">
-                                    <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
-                                    <circle id="progress-circle" class="text-green-500" stroke-width="8" stroke-dasharray="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
-                                </svg>
+                    <!-- Students Present and Attendance Progress Card -->
+                    <div class="rounded-xl bg-white shadow-md p-6 border border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Students Present Card -->
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="text-xs text-green-500 mb-2 font-semibold">Students Present Today</div>
+                                <div id="attendance-count-main" class="text-5xl font-bold">0</div>
                             </div>
-                            <div class="flex flex-col items-center justify-center z-10">
-                                <div class="text-xs text-green-500 mb-2 font-semibold">Attendance %</div>
-                                <div id="attendance-percent" class="text-3xl font-bold">0%</div>
+                            <!-- Circular Progress Card -->
+                            <div class="flex flex-col items-center justify-center relative aspect-square">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <svg class="w-full h-full transform -rotate-90">
+                                        <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
+                                        <circle id="progress-circle" class="text-green-500" stroke-width="8" stroke-dasharray="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col items-center justify-center z-10">
+                                    <div class="text-xs text-green-500 mb-2 font-semibold">Attendance %</div>
+                                    <div id="attendance-percent" class="text-3xl font-bold">0%</div>
+                                </div>
                             </div>
                         </div>
                     </div>
