@@ -80,9 +80,9 @@
                     </h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <!-- Camera Status -->
-                    <div id="camera-status" class="flex items-center" title="Camera Status">
-                        <svg id="camera-icon" class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                    <!-- Network Status -->
+                    <div id="network-status" class="flex items-center" title="Network Status">
+                        <!-- SVG icons will be dynamically inserted here -->
                     </div>
                 </div>
             </div>
@@ -373,6 +373,7 @@
         const loginForm = document.getElementById('login-form');
         const loginErrorEl = document.getElementById('login-error');
         const closeModalBtn = document.getElementById('close-modal-btn');
+        const networkStatusEl = document.getElementById('network-status');
 
         // Initialize Firebase
         function initializeFirebase() {
@@ -546,12 +547,8 @@
                 const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
                 videoEl.srcObject = stream;
                 cameraStream = stream;
-                document.getElementById('camera-icon').classList.remove('text-gray-400');
-                document.getElementById('camera-icon').classList.add('text-gray-700');
             } catch (err) {
                 console.error("Camera access denied or not available.", err);
-                document.getElementById('camera-icon').classList.remove('text-gray-700');
-                document.getElementById('camera-icon').classList.add('text-gray-400');
                 displayMessage('Camera not available. Check permissions.', 'red');
             }
         };
@@ -757,12 +754,60 @@
         document.getElementById('status-filter').addEventListener('change', () => updateLogList(searchLogsInput.value));
 
         // --- Initial setup ---
+        const updateNetworkStatusIcon = () => {
+            const isOnline = navigator.onLine;
+            const networkStatusEl = document.getElementById('network-status');
+            if (networkStatusEl) {
+                networkStatusEl.innerHTML = ''; // Clear existing icon
+                const iconSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                iconSVG.setAttribute("class", `w-5 h-5 ${isOnline ? 'text-blue-600' : 'text-gray-400'}`);
+                iconSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                iconSVG.setAttribute("viewBox", "0 0 24 24");
+                iconSVG.setAttribute("fill", "none");
+                iconSVG.setAttribute("stroke", "currentColor");
+                iconSVG.setAttribute("stroke-width", "2");
+                iconSVG.setAttribute("stroke-linecap", "round");
+                iconSVG.setAttribute("stroke-linejoin", "round");
+                const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                const path3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                if (isOnline) {
+                    path1.setAttribute("d", "M5 12.55a11 11 0 0 1 14.08 0");
+                    path2.setAttribute("d", "M1.42 9a16 16 0 0 1 21.16 0");
+                    path3.setAttribute("d", "M8.53 16.11a6 6 0 0 1 6.95 0");
+                    line.setAttribute("x1", "12");
+                    line.setAttribute("y1", "20");
+                    line.setAttribute("x2", "12");
+                    line.setAttribute("y2", "20");
+                    iconSVG.appendChild(path1);
+                    iconSVG.appendChild(path2);
+                    iconSVG.appendChild(path3);
+                    iconSVG.appendChild(line);
+                    networkStatusEl.setAttribute("title", "Network: Online");
+                } else {
+                    path1.setAttribute("d", "M22 13a4 4 0 0 0-4-4h-3.41A7 7 0 0 0 7 2C4.24 2 2.4 3.48 2 5.5");
+                    path2.setAttribute("d", "M4.2 14.11a.34.34 0 0 0 .19.1.58.58 0 0 0 .12-.03c.59-.14 1.2-.23 1.8-.27h.03a3.5 3.5 0 0 0 2.9-.55L14.5 9h2.5");
+                    path3.setAttribute("d", "M10 20a4 4 0 0 0 4-4v-1.79a3.5 3.5 0 0 0 1.9-2.91L18 9");
+                    iconSVG.appendChild(path1);
+                    iconSVG.appendChild(path2);
+                    iconSVG.appendChild(path3);
+                    networkStatusEl.setAttribute("title", "Network: Offline");
+                }
+                networkStatusEl.appendChild(iconSVG);
+            }
+        };
+
         window.addEventListener('hashchange', () => {
             const view = window.location.hash.slice(1) || 'dashboard';
             changeView(view);
         });
 
+        window.addEventListener('online', updateNetworkStatusIcon);
+        window.addEventListener('offline', updateNetworkStatusIcon);
+
         const initialView = window.location.hash.slice(1) || 'dashboard';
+        updateNetworkStatusIcon();
         initializeFirebase();
         changeView(initialView);
     </script>
