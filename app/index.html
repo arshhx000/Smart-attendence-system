@@ -6,6 +6,7 @@
     <title>SkoolAttend</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -69,20 +70,20 @@
         }
     </style>
 </head>
-<body class="bg-[#f9fafb]">
+<body class="bg-gray-100">
     <div id="app-root" class="flex flex-col container-layout text-gray-800">
         <!-- Status Bar -->
-        <header id="status-bar" class="bg-[#a8ff78] border-b border-gray-900 p-2">
+        <header id="status-bar" class="bg-gray-900 text-white border-b border-gray-700 p-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <h1 class="text-lg font-bold text-white">
+                    <h1 class="text-xl font-bold">
                         SkoolAttend
                     </h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <!-- Network Status -->
                     <div id="network-status" class="flex items-center" title="Network Status">
-                        <!-- SVG icons will be dynamically inserted here -->
+                        <!-- Font Awesome icons will be dynamically inserted here -->
                     </div>
                 </div>
             </div>
@@ -92,10 +93,10 @@
             <!-- Main Content Area -->
             <main class="main-view-container pb-20">
                 <!-- Dashboard View -->
-                <div id="dashboard" class="view-container space-y-6 w-full max-w-2xl mx-auto">
+                <div id="dashboard" class="view-container space-y-6 w-full max-w-2xl mx-auto mt-4">
                     <!-- Teacher Profile Photo -->
                     <div class="flex justify-center mb-6">
-                        <img id="profile-initials-display" class="w-36 h-36 rounded-3xl border-4 border-[#78ffd6] object-cover" src="https://images.unsplash.com/photo-1529626466318-c2b6946002f2?q=80&w=144&h=144&auto=format&fit=crop" alt="Student Profile Picture">
+                        <img id="profile-initials-display" class="w-36 h-36 rounded-[18px] border-4 border-green-500 object-cover shadow-lg" src="https://placehold.co/144x144/10b981/ffffff?text=T.J" alt="Teacher Profile Picture">
                     </div>
                     
                     <div class="flex justify-between items-center mb-6">
@@ -103,21 +104,21 @@
                     </div>
 
                     <div class="grid grid-cols-1 gap-6">
-                        <!-- Square Card -->
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-[#e8ffee]">
-                            <div class="text-xs text-[#78ffd6] mb-2">Students Present Today</div>
+                        <!-- Students Present Card -->
+                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-gray-200">
+                            <div class="text-xs text-green-500 mb-2 font-semibold">Students Present Today</div>
                             <div id="attendance-count-main" class="text-5xl font-bold">0</div>
                         </div>
                         <!-- Circular Progress Card -->
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-[#e8ffee] relative aspect-square">
+                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-gray-200 relative aspect-square">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-full h-full transform -rotate-90">
-                                    <circle class="text-[#e8ffee]" stroke-width="8" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
-                                    <circle id="progress-circle" class="text-[#78ffd6]" stroke-width="8" stroke-dasharray="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
+                                    <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
+                                    <circle id="progress-circle" class="text-green-500" stroke-width="8" stroke-dasharray="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
                                 </svg>
                             </div>
                             <div class="flex flex-col items-center justify-center z-10">
-                                <div class="text-xs text-[#78ffd6] mb-2">Attendance %</div>
+                                <div class="text-xs text-green-500 mb-2 font-semibold">Attendance %</div>
                                 <div id="attendance-percent" class="text-3xl font-bold">0%</div>
                             </div>
                         </div>
@@ -125,7 +126,7 @@
 
                     <div class="mt-8">
                         <h3 class="text-2xl font-semibold mb-4">Admin Details</h3>
-                        <div class="bg-white p-6 rounded-xl shadow-md flex flex-col gap-2 border border-[#e8ffee]">
+                        <div class="bg-white p-6 rounded-xl shadow-md flex flex-col gap-2 border border-gray-200">
                             <p class="text-gray-600 mb-1">User ID (for multi-user support)</p>
                             <p id="user-id-display" class="font-mono text-sm text-gray-700 break-all">Loading...</p>
                             <p id="last-synced-display" class="text-sm mt-2 text-gray-600">Last Synced: N/A</p>
@@ -140,7 +141,7 @@
                         <p class="text-gray-600">Position students in front of the camera</p>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="border border-gray-400 border-dashed rounded-lg aspect-video relative overflow-hidden bg-[#e8ffee] flex flex-col items-center justify-center">
+                        <div class="border border-gray-400 border-dashed rounded-lg aspect-video relative overflow-hidden bg-gray-200 flex flex-col items-center justify-center">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <video id="attendance-video" autoPlay class="w-full h-full object-cover"></video>
                                 <div class="absolute inset-0 flex items-center justify-center">
@@ -150,14 +151,14 @@
                                 </div>
                             </div>
                             <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-4">
-                                <button id="scan-btn" class="p-3 bg-[#e8ffee] rounded-full hover:bg-[#d3ffdd]">
-                                    <svg class="w-6 h-6 text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                                <button id="scan-btn" class="p-3 bg-green-500 text-white rounded-full hover:bg-green-600">
+                                    <i class="fa-solid fa-camera"></i>
                                 </button>
-                                <button id="prev-batch-btn" class="p-3 bg-[#e8ffee] rounded-full hover:bg-[#d3ffdd] hidden">
-                                    <svg class="w-6 h-6 text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                                <button id="prev-batch-btn" class="p-3 bg-gray-200 rounded-full hover:bg-gray-300 hidden">
+                                    <i class="fa-solid fa-chevron-left text-gray-700"></i>
                                 </button>
-                                <button id="next-batch-btn" class="p-3 bg-[#e8ffee] rounded-full hover:bg-[#d3ffdd] hidden">
-                                    <svg class="w-6 h-6 text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                <button id="next-batch-btn" class="p-3 bg-gray-200 rounded-full hover:bg-gray-300 hidden">
+                                    <i class="fa-solid fa-chevron-right text-gray-700"></i>
                                 </button>
                             </div>
                         </div>
@@ -165,20 +166,20 @@
                             <h2 class="text-xl font-bold">Recognition Result</h2>
                             <div id="student-card-container"></div>
                             <div class="flex space-x-3">
-                                <button id="reset-btn" class="flex-1 py-3 border border-gray-400 rounded-md text-gray-700 hover:bg-[#e8ffee] flex items-center justify-center">
-                                    <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.79 2.91L2 12"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.79-2.91L22 12"/><path d="M12 2v10l-4-4"/></svg>
+                                <button id="reset-btn" class="flex-1 py-3 border border-gray-400 rounded-md text-gray-700 hover:bg-gray-200 flex items-center justify-center">
+                                    <i class="fa-solid fa-arrow-rotate-left mr-2"></i>
                                     Reset
                                 </button>
-                                <button id="mark-present-btn" class="flex-1 py-3 bg-[#e8ffee] rounded-md text-gray-800 hover:bg-[#d3ffdd] flex items-center justify-center hidden">
-                                    <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                                <button id="mark-present-btn" class="flex-1 py-3 bg-green-500 rounded-md text-white hover:bg-green-600 flex items-center justify-center hidden">
+                                    <i class="fa-solid fa-check mr-2"></i>
                                     Mark Present
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-                        <button id="single-mode-btn" class="px-4 py-2 rounded-md bg-[#78ffd6] text-white shadow-md">Single Mode</button>
-                        <button id="batch-mode-btn" class="px-4 py-2 rounded-md bg-white text-[#78ffd6] border border-[#78ffd6] shadow-md">Batch Mode</button>
+                        <button id="single-mode-btn" class="px-4 py-2 rounded-md bg-green-500 text-white shadow-md">Single Mode</button>
+                        <button id="batch-mode-btn" class="px-4 py-2 rounded-md bg-white text-green-500 border border-green-500 shadow-md">Batch Mode</button>
                     </div>
                 </div>
 
@@ -191,7 +192,7 @@
                     <div class="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0">
                         <div class="flex space-x-2">
                             <div class="relative">
-                                <svg class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                                 <input type="text" id="search-logs" placeholder="Search student..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md w-full md:w-64">
                             </div>
                             <div class="relative">
@@ -202,7 +203,7 @@
                                     <option value="month">This Month</option>
                                     <option value="custom">Custom Range</option>
                                 </select>
-                                <svg class="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                             </div>
                             <div class="relative">
                                 <select id="status-filter" class="pl-3 pr-8 py-2 border border-gray-300 rounded-md appearance-none">
@@ -210,30 +211,30 @@
                                     <option value="present">Present</option>
                                     <option value="absent">Absent</option>
                                 </select>
-                                <svg class="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                             </div>
                         </div>
                         <div class="flex space-x-2">
-                            <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-[#e8ffee] flex items-center">
-                                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                            <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-200 flex items-center">
+                                <i class="fa-solid fa-filter mr-2"></i>
                                 Advanced Filter
                             </button>
-                            <button id="export-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-[#e8ffee] flex items-center">
-                                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                            <button id="export-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-200 flex items-center">
+                                <i class="fa-solid fa-download mr-2"></i>
                                 Export
                             </button>
                         </div>
                     </div>
                     <div class="border border-gray-300 rounded-lg overflow-hidden">
                         <table class="w-full">
-                            <thead class="bg-[#e8ffee]">
+                            <thead class="bg-gray-200">
                                 <tr>
                                     <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Student</th>
                                     <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Grade</th>
                                     <th id="status-sort-header" class="px-4 py-3 text-left text-sm font-medium text-gray-700 cursor-pointer">
                                         <div class="flex items-center">
                                             Status
-                                            <svg id="status-sort-icon" class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>
+                                            <i id="status-sort-icon" class="fa-solid fa-chevron-down ml-1 text-xs"></i>
                                         </div>
                                     </th>
                                     <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Time</th>
@@ -241,7 +242,7 @@
                                 </tr>
                             </thead>
                             <tbody id="attendance-list" class="divide-y divide-gray-200">
-                                <tr class="hover:bg-[#d3ffdd]">
+                                <tr class="hover:bg-gray-100">
                                     <td colspan="5" class="px-4 py-3 text-center text-gray-500">No attendance data to display.</td>
                                 </tr>
                             </tbody>
@@ -269,30 +270,30 @@
         </div>
 
         <!-- Bottom Navigation Bar -->
-        <nav class="fixed inset-x-0 bottom-0 bg-[#a8ff78] shadow-lg flex items-center justify-around p-2 md:p-4 rounded-t-3xl border-t border-gray-900">
+        <nav class="fixed inset-x-0 bottom-0 bg-gray-900 shadow-lg flex items-center justify-around p-2 md:p-4 rounded-t-3xl border-t border-gray-700">
             <a href="#dashboard" class="nav-link nav-icon-container flex flex-col items-center p-2 rounded-xl transition" data-view="dashboard">
                 <div class="w-10 h-10 flex items-center justify-center">
-                    <svg class="w-6 h-6 nav-icon text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    <i class="fa-solid fa-chart-pie text-xl nav-icon text-gray-400"></i>
                 </div>
             </a>
             <a href="#attendance" class="nav-link nav-icon-container flex flex-col items-center p-2 rounded-xl transition" data-view="attendance">
                 <div class="w-10 h-10 flex items-center justify-center">
-                    <svg class="w-6 h-6 nav-icon text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                    <i class="fa-solid fa-camera text-xl nav-icon text-gray-400"></i>
                 </div>
             </a>
-            <a href="#profile-login" class="nav-link nav-icon-container flex flex-col items-center p-1 rounded-full bg-gradient-to-tr from-[#78ffd6] to-[#78ffd6] shadow-md transition" data-view="profile-login">
+            <a href="#profile-login" class="nav-link nav-icon-container flex flex-col items-center p-1 rounded-full bg-green-500 shadow-md transition" data-view="profile-login">
                 <div class="w-12 h-12 flex items-center justify-center rounded-full bg-white text-gray-800">
-                    <svg id="profile-icon" class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <i id="profile-icon" class="fa-solid fa-user text-xl"></i>
                 </div>
             </a>
             <a href="#logs" class="nav-link nav-icon-container flex flex-col items-center p-2 rounded-xl transition" data-view="logs">
                 <div class="w-10 h-10 flex items-center justify-center">
-                    <svg class="w-6 h-6 nav-icon text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0-1-1-2-2-2H3c-1 0-2 1-2 2v8a2 2 0 0 0 2 2h16c1 0 2-1 2-2"/><path d="M18.4 8.6c.9 1.4 1.4 3.2 1.4 5.2.4 1.4 0 3.1-.6 4.3"/><path d="M22 17a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2Z"/><path d="M8 12h8"/><path d="M8 18h5"/></svg>
+                    <i class="fa-solid fa-list-check text-xl nav-icon text-gray-400"></i>
                 </div>
             </a>
             <a href="#help" class="nav-link nav-icon-container flex flex-col items-center p-2 rounded-xl transition" data-view="help">
                 <div class="w-10 h-10 flex items-center justify-center">
-                    <svg class="w-6 h-6 nav-icon text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                    <i class="fa-solid fa-circle-question text-xl nav-icon text-gray-400"></i>
                 </div>
             </a>
         </nav>
@@ -304,14 +305,14 @@
                 <form id="login-form" class="space-y-4">
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                        <input type="text" id="username" name="username" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#78ffd6] focus:ring-[#78ffd6] sm:text-sm p-2" required>
+                        <input type="text" id="username" name="username" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2" required>
                     </div>
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" id="password" name="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#78ffd6] focus:ring-[#78ffd6] sm:text-sm p-2" required>
+                        <input type="password" id="password" name="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2" required>
                     </div>
                     <div id="login-error" class="text-red-500 text-sm hidden">Invalid username or password.</div>
-                    <button type="submit" class="w-full bg-[#78ffd6] text-white py-2 rounded-md hover:bg-[#67e2c5] transition">Login</button>
+                    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">Login</button>
                 </form>
                 <button id="close-modal-btn" class="mt-4 w-full text-gray-600 hover:text-gray-800 transition">Close</button>
             </div>
@@ -438,7 +439,7 @@
                 `;
             } else if (error) {
                 content = `
-                    <svg class="w-12 h-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    <i class="fa-solid fa-xmark-circle text-4xl text-red-500"></i>
                     <p class="mt-2 text-gray-700 text-center">${error}</p>
                 `;
             } else if (!student) {
@@ -459,18 +460,18 @@
                         <p class="text-gray-600">${student.grade}</p>
                         <div class="mt-2 flex items-center">
                             ${student.recognized ?
-                                `<svg class="w-5 h-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                                <span class="ml-1 text-gray-700">Recognized</span>`
+                                `<i class="fa-solid fa-check-circle text-green-500 mr-1"></i>
+                                <span class="text-gray-700">Recognized</span>`
                                 :
-                                `<svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                                <span class="ml-1 text-gray-500">Not recognized</span>`
+                                `<i class="fa-solid fa-xmark-circle text-red-500 mr-1"></i>
+                                <span class="text-gray-500">Not recognized</span>`
                             }
                         </div>
                     </div>
                 `;
             }
             const card = document.createElement('div');
-            card.className = `border ${student && student.recognized ? 'border-[#e8ffee] bg-white' : 'border-gray-300 bg-white'} rounded-lg p-4 flex items-center h-40`;
+            card.className = `border ${student && student.recognized ? 'border-green-300 bg-white' : 'border-gray-300 bg-white'} rounded-lg p-4 flex items-center h-40`;
             if (loading || error || !student) {
                 card.className = "border border-gray-300 border-dashed rounded-lg p-4 flex flex-col items-center justify-center h-40";
             }
@@ -482,34 +483,13 @@
         const setActiveNavLink = (view) => {
             navLinks.forEach(link => {
                 const icon = link.querySelector('.nav-icon');
-                if (icon) icon.classList.remove('text-[#78ffd6]');
-                link.classList.remove('bg-[#82d659]');
-                link.classList.remove('bg-gradient-to-tr', 'from-[#78ffd6]', 'to-[#78ffd6]', 'shadow-md');
-                link.classList.add('text-gray-200');
+                if (icon) icon.classList.remove('text-green-500');
             });
 
             const activeLink = document.querySelector(`[data-view="${view}"]`);
             if (activeLink) {
                 const icon = activeLink.querySelector('.nav-icon');
-                if (icon) icon.classList.add('text-[#78ffd6]');
-                activeLink.classList.remove('text-gray-200');
-                activeLink.classList.add('bg-[#82d659]');
-            }
-
-            // Special handling for the profile button
-            if (isLoggedIn) {
-                const profileLink = document.querySelector(`[data-view="profile-login"]`);
-                if (profileLink) {
-                    profileLink.classList.remove('bg-[#82d659]', 'text-gray-200');
-                    profileLink.classList.add('bg-gradient-to-tr', 'from-[#78ffd6]', 'to-[#78ffd6]', 'shadow-md');
-                }
-            } else {
-                const profileLink = document.querySelector(`[data-view="profile-login"]`);
-                if (profileLink) {
-                    profileLink.classList.add('bg-gradient-to-tr', 'from-[#78ffd6]', 'to-[#78ffd6]', 'shadow-md');
-                    const icon = profileLink.querySelector('.nav-icon');
-                    if (icon) icon.classList.remove('text-[#78ffd6]');
-                }
+                if (icon) icon.classList.add('text-green-500');
             }
         };
 
@@ -561,10 +541,7 @@
 
             if (username === 'teacher' && password === 'password123') {
                 isLoggedIn = true;
-                // Since the profile image is now a static picture, this logic is removed.
-                // profileInitialsDisplay.textContent = 'T';
-                // profileInitialsDisplay.classList.remove('text-[#78ffd6]');
-                // profileInitialsDisplay.classList.add('text-white', 'bg-gradient-to-tr', 'from-[#78ffd6]', 'to-[#78ffd6]');
+                profileInitialsDisplay.src = "https://placehold.co/144x144/10b981/ffffff?text=T.J";
                 userIdDisplayEl.textContent = 'Logged in as Teacher';
                 loginErrorEl.classList.add('hidden');
                 displayMessage('Login successful!', '#22c55e');
@@ -582,10 +559,10 @@
         // --- Attendance Logic ---
         singleModeBtn.addEventListener('click', () => {
             attendanceMode = 'single';
-            singleModeBtn.classList.remove('bg-white', 'text-[#78ffd6]', 'border', 'border-[#78ffd6]');
-            singleModeBtn.classList.add('bg-[#78ffd6]', 'text-white');
-            batchModeBtn.classList.remove('bg-[#78ffd6]', 'text-white');
-            batchModeBtn.classList.add('bg-white', 'text-[#78ffd6]', 'border', 'border-[#78ffd6]');
+            singleModeBtn.classList.remove('bg-white', 'text-green-500', 'border', 'border-green-500');
+            singleModeBtn.classList.add('bg-green-500', 'text-white');
+            batchModeBtn.classList.remove('bg-green-500', 'text-white');
+            batchModeBtn.classList.add('bg-white', 'text-green-500', 'border', 'border-green-500');
             document.getElementById('prev-batch-btn').classList.add('hidden');
             document.getElementById('next-batch-btn').classList.add('hidden');
             renderStudentCard(null);
@@ -593,10 +570,10 @@
 
         batchModeBtn.addEventListener('click', () => {
             attendanceMode = 'batch';
-            batchModeBtn.classList.remove('bg-white', 'text-[#78ffd6]', 'border', 'border-[#78ffd6]');
-            batchModeBtn.classList.add('bg-[#78ffd6]', 'text-white');
-            singleModeBtn.classList.remove('bg-[#78ffd6]', 'text-white');
-            singleModeBtn.classList.add('bg-white', 'text-[#78ffd6]', 'border', 'border-[#78ffd6]');
+            batchModeBtn.classList.remove('bg-white', 'text-green-500', 'border', 'border-green-500');
+            batchModeBtn.classList.add('bg-green-500', 'text-white');
+            singleModeBtn.classList.remove('bg-green-500', 'text-white');
+            singleModeBtn.classList.add('bg-white', 'text-green-500', 'border', 'border-green-500');
             document.getElementById('prev-batch-btn').classList.remove('hidden');
             document.getElementById('next-batch-btn').classList.remove('hidden');
             renderStudentCard(null);
@@ -695,7 +672,7 @@
             } else {
                 filteredLogs.forEach(log => {
                     const row = document.createElement('tr');
-                    row.className = 'hover:bg-[#d3ffdd]';
+                    row.className = 'hover:bg-gray-100';
                     const time = new Date(log.timestamp.toMillis()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     row.innerHTML = `
                         <td class="px-4 py-3 text-sm">${log.studentName}</td>
@@ -745,8 +722,8 @@
             sortDirection = sortDirection === 'desc' ? 'asc' : 'desc';
             const sortIcon = document.getElementById('status-sort-icon');
             sortIcon.outerHTML = sortDirection === 'desc'
-                ? '<svg id="status-sort-icon" class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>'
-                : '<svg id="status-sort-icon" class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+                ? '<i id="status-sort-icon" class="fa-solid fa-chevron-down ml-1 text-xs"></i>'
+                : '<i id="status-sort-icon" class="fa-solid fa-chevron-up ml-1 text-xs"></i>';
             updateLogList(searchLogsInput.value);
         });
 
@@ -760,42 +737,10 @@
             const networkStatusEl = document.getElementById('network-status');
             if (networkStatusEl) {
                 networkStatusEl.innerHTML = ''; // Clear existing icon
-                const iconSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                iconSVG.setAttribute("class", `w-5 h-5 ${isOnline ? 'text-[#e8ffee]' : 'text-gray-400'}`);
-                iconSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                iconSVG.setAttribute("viewBox", "0 0 24 24");
-                iconSVG.setAttribute("fill", "none");
-                iconSVG.setAttribute("stroke", "currentColor");
-                iconSVG.setAttribute("stroke-width", "2");
-                iconSVG.setAttribute("stroke-linecap", "round");
-                iconSVG.setAttribute("stroke-linejoin", "round");
-                const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                const path3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                if (isOnline) {
-                    path1.setAttribute("d", "M5 12.55a11 11 0 0 1 14.08 0");
-                    path2.setAttribute("d", "M1.42 9a16 16 0 0 1 21.16 0");
-                    path3.setAttribute("d", "M8.53 16.11a6 6 0 0 1 6.95 0");
-                    line.setAttribute("x1", "12");
-                    line.setAttribute("y1", "20");
-                    line.setAttribute("x2", "12");
-                    line.setAttribute("y2", "20");
-                    iconSVG.appendChild(path1);
-                    iconSVG.appendChild(path2);
-                    iconSVG.appendChild(path3);
-                    iconSVG.appendChild(line);
-                    networkStatusEl.setAttribute("title", "Network: Online");
-                } else {
-                    path1.setAttribute("d", "M22 13a4 4 0 0 0-4-4h-3.41A7 7 0 0 0 7 2C4.24 2 2.4 3.48 2 5.5");
-                    path2.setAttribute("d", "M4.2 14.11a.34.34 0 0 0 .19.1.58.58 0 0 0 .12-.03c.59-.14 1.2-.23 1.8-.27h.03a3.5 3.5 0 0 0 2.9-.55L14.5 9h2.5");
-                    path3.setAttribute("d", "M10 20a4 4 0 0 0 4-4v-1.79a3.5 3.5 0 0 0 1.9-2.91L18 9");
-                    iconSVG.appendChild(path1);
-                    iconSVG.appendChild(path2);
-                    iconSVG.appendChild(path3);
-                    networkStatusEl.setAttribute("title", "Network: Offline");
-                }
-                networkStatusEl.appendChild(iconSVG);
+                const iconClass = isOnline ? 'fa-solid fa-wifi' : 'fa-solid fa-cloud-arrow-down';
+                const iconColor = isOnline ? 'text-green-500' : 'text-gray-400';
+                const iconTitle = isOnline ? 'Network: Online' : 'Network: Offline';
+                networkStatusEl.innerHTML = `<i class="${iconClass} text-xl ${iconColor}" title="${iconTitle}"></i>`;
             }
         };
 
