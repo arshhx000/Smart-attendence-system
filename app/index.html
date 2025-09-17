@@ -98,18 +98,24 @@
                         <div class="w-12 h-12 rounded-full border-4 border-blue-200 bg-white flex items-center justify-center text-blue-600 font-bold">U</div>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center border border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Square Card -->
+                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-gray-200">
                             <div class="text-xs text-blue-600 mb-2">Students Present Today</div>
-                            <div id="attendance-count" class="text-4xl font-bold text-gray-800">0</div>
+                            <div id="attendance-count-main" class="text-5xl font-bold text-gray-800">0</div>
                         </div>
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center border border-gray-200">
-                            <div class="text-xs text-blue-600 mb-2">Done</div>
-                            <div class="text-4xl font-bold text-gray-800">22</div>
-                        </div>
-                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center border border-gray-200">
-                            <div class="text-xs text-blue-600 mb-2">In Progress</div>
-                            <div class="text-4xl font-bold text-gray-800">7</div>
+                        <!-- Circular Progress Card -->
+                        <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-gray-200 relative aspect-square">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
+                                    <circle id="progress-circle" class="text-blue-600" stroke-width="8" stroke-dasharray="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="70" cx="50%" cy="50%"/>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col items-center justify-center z-10">
+                                <div class="text-xs text-blue-600 mb-2">Attendance %</div>
+                                <div id="attendance-percent" class="text-3xl font-bold text-gray-800">0%</div>
+                            </div>
                         </div>
                     </div>
 
@@ -318,6 +324,7 @@
             { id: 'mock3', name: 'Suresh Kumar', grade: 'Mock Grade' },
             { id: 'mock4', name: 'Priya Sharma', grade: 'Mock Grade' },
         ];
+        const TOTAL_STUDENTS = MOCK_STUDENTS.length;
 
         // UI elements
         const viewContainers = document.querySelectorAll('.view-container');
@@ -595,7 +602,20 @@
 
         const updateDashboardCounts = () => {
             const uniqueStudentsPresent = new Set(attendanceLogs.map(log => log.studentId)).size;
-            attendanceCountEl.textContent = uniqueStudentsPresent;
+            const attendanceCountMainEl = document.getElementById('attendance-count-main');
+            const attendancePercentEl = document.getElementById('attendance-percent');
+            const progressCircle = document.getElementById('progress-circle');
+
+            if (attendanceCountMainEl) {
+                attendanceCountMainEl.textContent = uniqueStudentsPresent;
+            }
+            if (attendancePercentEl && progressCircle) {
+                const percentage = TOTAL_STUDENTS > 0 ? Math.round((uniqueStudentsPresent / TOTAL_STUDENTS) * 100) : 0;
+                attendancePercentEl.textContent = `${percentage}%`;
+                const circumference = 2 * Math.PI * 70;
+                progressCircle.style.strokeDasharray = circumference;
+                progressCircle.style.strokeDashoffset = circumference - (percentage / 100) * circumference;
+            }
         };
 
         const updateLogList = (filter = '', dateFilter = 'today', statusFilter = 'all') => {
