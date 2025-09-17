@@ -95,14 +95,14 @@
                 <div id="dashboard" class="view-container space-y-6 w-full max-w-2xl mx-auto">
                     <!-- Teacher Profile Photo -->
                     <div class="flex justify-center mb-6">
-                        <div id="profile-initials-display" class="w-24 h-24 rounded-full border-4 border-[#78ffd6] bg-white flex items-center justify-center text-[#78ffd6] font-bold text-3xl">U</div>
+                        <img id="profile-initials-display" class="w-36 h-36 rounded-3xl border-4 border-[#78ffd6] object-cover" src="https://images.unsplash.com/photo-1529626466318-c2b6946002f2?q=80&w=144&h=144&auto=format&fit=crop" alt="Student Profile Picture">
                     </div>
                     
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-3xl font-semibold tracking-tight">Dashboard</h2>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <!-- Square Card -->
                         <div class="rounded-xl bg-white shadow-md p-6 flex flex-col items-center justify-center border border-[#e8ffee]">
                             <div class="text-xs text-[#78ffd6] mb-2">Students Present Today</div>
@@ -561,9 +561,10 @@
 
             if (username === 'teacher' && password === 'password123') {
                 isLoggedIn = true;
-                profileInitialsDisplay.textContent = 'T';
-                profileInitialsDisplay.classList.remove('text-[#78ffd6]');
-                profileInitialsDisplay.classList.add('text-white', 'bg-gradient-to-tr', 'from-[#78ffd6]', 'to-[#78ffd6]');
+                // Since the profile image is now a static picture, this logic is removed.
+                // profileInitialsDisplay.textContent = 'T';
+                // profileInitialsDisplay.classList.remove('text-[#78ffd6]');
+                // profileInitialsDisplay.classList.add('text-white', 'bg-gradient-to-tr', 'from-[#78ffd6]', 'to-[#78ffd6]');
                 userIdDisplayEl.textContent = 'Logged in as Teacher';
                 loginErrorEl.classList.add('hidden');
                 displayMessage('Login successful!', '#22c55e');
